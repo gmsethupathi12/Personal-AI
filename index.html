@@ -1,770 +1,2217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Levi.ai - Live Intelligence for a Changing World</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --color-bg-dark: #0c0e13;
-            --color-bg-surface: #191c21;
-            --color-bg-card: #1d2025;
-            --color-text-primary: #e2e2ea;
-            --color-text-secondary: #bac9cc;
-            --color-text-muted: #849396;
-            --color-accent-cyan: #00e5ff;
-            --color-accent-cyan-light: #c3f5ff;
-            --color-accent-green: #a8ffd2;
-            --color-border: rgba(59, 73, 76, 0.2);
-            --color-purple: #d0bcff;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg-dark);
-            color: var(--color-text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        body {
-            background-image: radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-        }
-
-        .text-xs { font-size: 10px; }
-        .text-sm { font-size: 12px; }
-        .text-base { font-size: 14px; }
-        .text-lg { font-size: 16px; }
-        .text-xl { font-size: 18px; }
-        .text-2xl { font-size: 22px; }
-        .text-3xl { font-size: 28px; }
-        .text-4xl { font-size: 32px; }
-        .text-5xl { font-size: 44px; }
-        .text-6xl { font-size: 54px; }
-
-        /* Utilities */
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .gap-4 { gap: 16px; }
-        .gap-6 { gap: 24px; }
-        .gap-8 { gap: 32px; }
-        .items-center { align-items: center; }
-        .items-start { align-items: flex-start; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .w-full { width: 100%; }
-        .text-center { text-align: center; }
-
-        /* Main Layout */
-        main {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 48px 20px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(25, 28, 33, 0.9);
-            border: 1px solid var(--color-border);
-            padding: 4px 12px;
-            border-radius: 9999px;
-            margin-bottom: 24px;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--color-accent-cyan-light);
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--color-accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 4px var(--color-accent-cyan);
-        }
-
-        .hero h1 {
-            font-size: 32px;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: var(--color-text-primary);
-            letter-spacing: -1.2px;
-        }
-
-        .hero h1 .accent { color: var(--color-accent-cyan); }
-
-        .hero-subtitle {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-            margin-bottom: 24px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Search/Form Box */
-        .search-box {
-            background: rgba(12, 14, 19, 0.96);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 24px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-box input,
-        .search-box textarea {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--color-text-primary);
-            font-family: inherit;
-            font-size: 13px;
-            outline: none;
-            margin-bottom: 12px;
-        }
-
-        .search-box input::placeholder,
-        .search-box textarea::placeholder {
-            color: var(--color-text-muted);
-        }
-
-        .search-box-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--color-accent-cyan);
-            color: #00363d;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 229, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--color-border);
-            color: var(--color-text-primary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-accent-cyan);
-            color: var(--color-accent-cyan);
-        }
-
-        /* Card Styles */
-        .card {
-            background: rgba(12, 14, 19, 0.85);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 32px;
-        }
-
-        .card-dark {
-            background: var(--color-bg-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 16px;
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(168, 255, 210, 0.1);
-            border: 1px solid rgba(168, 255, 210, 0.2);
-            padding: 2px 8px;
-            border-radius: 9999px;
-            font-size: 9px;
-            color: var(--color-accent-green);
-            font-weight: 600;
-        }
-
-        .badge::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: var(--color-accent-green);
-            border-radius: 50%;
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            gap: 12px;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        /* Sections */
-        .section {
-            padding: 48px 20px;
-            margin-bottom: 32px;
-        }
-
-        .section-title {
-            display: inline-block;
-            color: var(--color-accent-green);
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-heading {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--color-text-primary);
-        }
-
-        /* Trust Row */
-        .trust-row {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .trust-item {
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-            font-size: 11px;
-            color: var(--color-text-muted);
-        }
-
-        .trust-item svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px 12px;
-            background: rgba(25, 28, 33, 0.5);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            color: var(--color-text-primary);
-            font-family: inherit;
-            font-size: 13px;
-        }
-
-        .form-group input::placeholder {
-            color: var(--color-text-muted);
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--color-accent-cyan);
-            background: rgba(0, 229, 255, 0.05);
-        }
-
-        /* Status Messages */
-        .form-status {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            display: none;
-        }
-
-        .form-status.success {
-            background: rgba(168, 255, 210, 0.1);
-            border: 1px solid rgba(168, 255, 210, 0.3);
-            color: var(--color-accent-green);
-            display: block;
-        }
-
-        .form-status.error {
-            background: rgba(255, 100, 100, 0.1);
-            border: 1px solid rgba(255, 100, 100, 0.3);
-            color: #ff6464;
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--color-border);
-            padding: 40px 20px 24px;
-            background: var(--color-bg-dark);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 40px;
-            margin-bottom: 32px;
-        }
-
-        .footer-brand {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .footer-brand img {
-            width: 28px;
-            height: 28px;
-        }
-
-        .footer-brand-text {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-brand-text .accent {
-            color: var(--color-accent-cyan);
-            text-shadow: 0 0 4px rgba(0, 229, 255, 0.7);
-        }
-
-        .footer-desc {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-            max-width: 280px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 48px;
-        }
-
-        .footer-col {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .footer-col-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-col p {
-            font-size: 13px;
-            color: var(--color-text-muted);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(59, 73, 76, 0.1);
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-bottom p {
-            font-size: 12px;
-            color: var(--color-text-muted);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-icon {
-            width: 30px;
-            height: 30px;
-            background: rgba(40, 42, 48, 0.5);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: rgba(0, 229, 255, 0.2);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero { padding: 32px 20px; }
-            .hero h1 { font-size: 28px; }
-            .section { padding: 32px 20px; }
-            .section-heading { font-size: 20px; }
-            .grid-2 { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; gap: 24px; }
-            .footer-links { flex-direction: column; gap: 24px; }
-            .footer-bottom { flex-direction: column; gap: 12px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 24px; }
-            .hero-subtitle { font-size: 13px; }
-            .section-heading { font-size: 18px; }
-            .btn { padding: 8px 12px; font-size: 11px; }
-        }
-
-        /* Loading State */
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .btn.loading::after {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-left: 8px;
-            border: 2px solid rgba(0, 229, 255, 0.3);
-            border-top-color: var(--color-accent-cyan);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Levi.ai — Autonomous AI Intelligence & Sheets Automation</title>
+  <meta name="description" content="Next-generation autonomous AI platform with zero-latency core, real-time conversational agents, and native Google Sheets synchronization.">
+  <meta name="theme-color" content="#0c0e13">
+  
+  <style>
+    /* ==========================================================================
+       LEVI.AI DESIGN SYSTEM - INLINE PRODUCTION STYLES
+       Color Palette:
+       - Background: #0c0e13
+       - Surface/Cards: #191c21
+       - Accent Primary: #00e5ff (Cyan)
+       - Accent Secondary: #a8ffd2 (Mint Green)
+       - Text Primary: #e2e2ea
+       - Text Secondary: #bac9cc
+       - Text Muted: #849396
+       - Border: rgba(59, 73, 76, 0.3)
+       ========================================================================== */
+
+    :root {
+      --bg: #0c0e13;
+      --surface: #191c21;
+      --surface-hover: #22262d;
+      --accent: #00e5ff;
+      --accent-secondary: #a8ffd2;
+      --accent-glow: rgba(0, 229, 255, 0.35);
+      --text-primary: #e2e2ea;
+      --text-secondary: #bac9cc;
+      --text-muted: #849396;
+      --border: rgba(59, 73, 76, 0.4);
+      --border-focus: #00e5ff;
+      --error-color: #ff5252;
+      --success-color: #00e676;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-full: 9999px;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 90% 40%, rgba(168, 255, 210, 0.05) 0%, transparent 50%),
+                  var(--bg);
+      background-attachment: fixed;
+    }
+
+    /* Accessibility Focus Rings */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Container Utility */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* Glow & Highlight Utility */
+    .cyan-gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(12, 14, 19, 0.82);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-normal);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0c0e13;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 20px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .nav-cta-btn:hover {
+      background: rgba(0, 229, 255, 0.12);
+      box-shadow: 0 0 16px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      box-shadow: 0 0 8px var(--accent-secondary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.12;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    .hero-features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .hero-features-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .hero-features-list svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       HERO FORM CARD (ONLY 3 FIELDS: Name, Email, Phone)
+       ========================================================================== */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-normal);
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+    }
+
+    .form-card-header {
+      margin-bottom: 24px;
+    }
+
+    .form-card-title {
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .form-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      padding: 12px 16px;
+      background: rgba(12, 14, 19, 0.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      background: rgba(12, 14, 19, 0.95);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      height: 52px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      color: #0c0e13;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.25);
+    }
+
+    .form-submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 229, 255, 0.4);
+      filter: brightness(1.06);
+    }
+
+    .form-submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(12, 14, 19, 0.3);
+      border-top-color: #0c0e13;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Form Feedback Messages */
+    .form-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: none;
+      line-height: 1.4;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .form-message.success {
+      background: rgba(0, 230, 118, 0.12);
+      border: 1px solid rgba(0, 230, 118, 0.4);
+      color: #00e676;
+    }
+
+    .form-message.error {
+      background: rgba(255, 82, 82, 0.12);
+      border: 1px solid rgba(255, 82, 82, 0.4);
+      color: #ff5252;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-trust-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    /* ==========================================================================
+       METRICS SECTION (3 STATS)
+       ========================================================================== */
+    .metrics-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(25, 28, 33, 0.4);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .metric-card {
+      padding: 24px;
+      position: relative;
+    }
+
+    .metric-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 0;
+      height: 60%;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .metric-value {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .metric-label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .metric-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       FEATURES SECTION (4 CARDS)
+       ========================================================================== */
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-tag {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .features-section {
+      padding: 100px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      transition: var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 255, 0.4);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.08);
+    }
+
+    .feature-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .feature-card-title {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .feature-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       AUDIENCE SECTION (3+ USE CASES)
+       ========================================================================== */
+    .audience-section {
+      padding: 90px 0;
+      background: rgba(18, 21, 26, 0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-normal);
+    }
+
+    .audience-card:hover {
+      border-color: rgba(168, 255, 210, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .audience-role-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+
+    .audience-card-title {
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    .audience-card-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .audience-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ==========================================================================
+       LIVE ARCHITECTURE / SHEET INTEGRATION SHOWCASE
+       ========================================================================== */
+    .preview-section {
+      padding: 90px 0;
+    }
+
+    .preview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    .preview-title-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      color: #00e676;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+
+    .flow-step-item {
+      background: rgba(12, 14, 19, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+    }
+
+    .flow-step-number {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: #0c0e13;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .flow-step-title {
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .flow-step-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       CTA BANNER SECTION
+       ========================================================================== */
+    .cta-section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(168, 255, 210, 0.04) 100%), var(--surface);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 60px 48px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      color: #0c0e13;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 229, 255, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 229, 255, 0.05);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+      background: #090a0e;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      max-width: 320px;
+      line-height: 1.55;
+    }
+
+    .footer-col-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col-links {
+      list-style: none;
+    }
+
+    .footer-col-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+    }
+
+    .footer-col-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       FIXED CHAT WIDGET (BOTTOM-RIGHT)
+       - Toggle button (minimized): 60px circle, gradient background #00e5ff to #a8ffd2
+       - Chat window: 380px width, 500px height
+       - User messages: cyan background, right-aligned
+       - AI messages: dark background with cyan left border, left-aligned
+       - Input field: transparent background, cyan border on focus
+       - Send button: primary button style
+       - Loading indicator: "⏳ Thinking..."
+       - Error messages: red text with error icon
+       ========================================================================== */
+    .chat-widget-root {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      font-family: var(--font-family);
+    }
+
+    /* 60px Circle Toggle Button */
+    .chat-toggle-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0c0e13;
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.45);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      position: relative;
+    }
+
+    .chat-toggle-btn:hover {
+      transform: scale(1.08) rotate(4deg);
+      box-shadow: 0 12px 32px rgba(0, 229, 255, 0.6);
+    }
+
+    .chat-toggle-btn svg {
+      width: 28px;
+      height: 28px;
+      transition: transform 0.25s ease;
+    }
+
+    .chat-toggle-btn.is-active svg.icon-chat {
+      display: none;
+    }
+
+    .chat-toggle-btn svg.icon-close {
+      display: none;
+    }
+
+    .chat-toggle-btn.is-active svg.icon-close {
+      display: block;
+    }
+
+    /* Chat Notification Badge / Dot */
+    .chat-status-dot {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      background: #00e676;
+      border: 2px solid #0c0e13;
+      border-radius: 50%;
+    }
+
+    /* Chat Window Container: 380px width, 500px height */
+    .chat-window {
+      position: absolute;
+      bottom: 74px;
+      right: 0;
+      width: 380px;
+      height: 500px;
+      background: var(--surface);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .chat-window.is-open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+
+    /* Chat Window Header with Gradient Background */
+    .chat-header {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #0c0e13;
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-avatar {
+      width: 34px;
+      height: 34px;
+      background: #0c0e13;
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .chat-header-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0c0e13;
+      line-height: 1.1;
+    }
+
+    .chat-header-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1a3832;
+    }
+
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chat-header-btn {
+      background: transparent;
+      border: none;
+      color: #0c0e13;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast);
+    }
+
+    .chat-header-btn:hover {
+      background: rgba(12, 14, 19, 0.15);
+    }
+
+    /* Chat Messages Body Area */
+    .chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #12141a;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scrollbar for Chat */
+    .chat-messages::-webkit-scrollbar {
+      width: 5px;
+    }
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .chat-bubble {
+      max-width: 82%;
+      padding: 11px 14px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      word-wrap: break-word;
+      animation: messageIn 0.25s ease-out;
+    }
+
+    @keyframes messageIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* User Messages: cyan background, right-aligned */
+    .chat-bubble.user-msg {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #0c0e13;
+      border-radius: 14px 14px 2px 14px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+    }
+
+    /* AI Messages: dark background with cyan left border, left-aligned */
+    .chat-bubble.ai-msg {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--text-primary);
+      border-left: 3px solid var(--accent);
+      border-radius: 2px 14px 14px 14px;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .chat-msg-time {
+      display: block;
+      font-size: 0.68rem;
+      margin-top: 5px;
+      opacity: 0.7;
+      text-align: right;
+    }
+
+    .user-msg .chat-msg-time {
+      color: #0c0e13;
+    }
+
+    .ai-msg .chat-msg-time {
+      color: var(--text-muted);
+    }
+
+    /* Loading Indicator: "⏳ Thinking..." */
+    .chat-loading {
+      align-self: flex-start;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 2px 14px 14px 14px;
+      padding: 10px 14px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-loading.is-active {
+      display: flex;
+    }
+
+    /* Error Messages: red text with error icon */
+    .chat-bubble.error-msg {
+      align-self: flex-start;
+      background: rgba(255, 82, 82, 0.12);
+      border-left: 3px solid var(--error-color);
+      border-radius: 2px 14px 14px 14px;
+      color: #ff5252;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Chat Footer / Input Form */
+    .chat-footer {
+      padding: 12px 14px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .chat-input-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(12, 14, 19, 0.8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      padding: 4px 6px 4px 14px;
+      transition: var(--transition-fast);
+    }
+
+    .chat-input-form:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .chat-input-field {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+
+    .chat-input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    .chat-send-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      border: none;
+      color: #0c0e13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .chat-send-btn:hover:not(:disabled) {
+      transform: scale(1.08);
+    }
+
+    .chat-send-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN SYSTEM
+       - Desktop (>768px): Multi-column layouts, larger fonts, hover effects
+       - Tablet (480-768px): Optimized spacing, 2-column grids where possible
+       - Mobile (<480px): Stack elements vertically, smaller fonts, full-width inputs
+       ========================================================================== */
+
+    /* Tablet (480px to 768px) */
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-title {
+        font-size: 2.6rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .nav-links {
+        display: none; /* Collapsed for clean mobile/tablet experience */
+      }
+    }
+
+    /* Mobile (<480px) */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .hero-section {
+        padding: 48px 0 40px;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .form-card {
+        padding: 24px 18px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .metric-card:not(:last-child)::after {
+        display: none;
+      }
+
+      .metric-card {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .metric-card:last-child {
+        border-bottom: none;
+      }
+
+      .metric-value {
+        font-size: 2.5rem;
+      }
+
+      .feature-card {
+        padding: 24px 20px;
+      }
+
+      .section-title {
+        font-size: 1.9rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .cta-card {
+        padding: 36px 20px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Mobile Chat Window Constraints */
+      .chat-window {
+        width: calc(100vw - 32px);
+        height: min(500px, calc(100vh - 120px));
+        right: 0;
+        bottom: 74px;
+      }
+
+      .chat-widget-root {
+        bottom: 18px;
+        right: 18px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <span class="hero-badge">Live Intelligence</span>
-                <h1>Ask anything.<br>Get the <span class="accent">latest answer</span>.</h1>
-                <p class="hero-subtitle">
-                    Levi searches live information, analyzes multiple verified sources, and delivers clear, source-backed answers in seconds.
-                </p>
 
-                <!-- Form Box -->
-                <div class="search-box">
-                    <form id="contactForm">
-                        <div class="form-status" id="formStatus"></div>
+  <!-- ========================================================================
+       TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="brand-logo" aria-label="Levi.ai Homepage">
+        <div class="brand-logo-icon">L</div>
+        <span>Levi<span class="cyan-gradient-text">.ai</span></span>
+      </a>
 
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                        </div>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#metrics">Performance</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#integration">Sheets Sync</a></li>
+        </ul>
+      </nav>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                        </div>
+      <a href="#join-section" class="nav-cta-btn">
+        <span>Get Started</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </header>
 
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
-                        </div>
+  <main>
+    <!-- ========================================================================
+         HERO SECTION WITH LEAD GENERATION FORM (Name, Email, Phone ONLY)
+         ======================================================================== -->
+    <section class="hero-section" id="join-section">
+      <div class="container hero-grid">
+        
+        <!-- Left: Hero Headline & Value Proposition -->
+        <div class="hero-text-content">
+          <div class="hero-badge">
+            <span class="hero-badge-pulse"></span>
+            <span>Next-Gen Autonomous AI Engine</span>
+          </div>
 
-                        <div class="search-box-bottom">
-                            <span></span>
-                            <button type="submit" class="btn btn-primary">Join Now</button>
-                        </div>
-                    </form>
-                </div>
+          <h1 class="hero-title">
+            Enterprise Intelligence with <span class="cyan-gradient-text">Zero Latency</span>
+          </h1>
 
-                <!-- Trust Row -->
-                <div class="trust-row">
-                    <div class="trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-                        </svg>
-                        <span>Live streaming web sources</span>
-                    </div>
-                    <div class="trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-                        </svg>
-                        <span>Multimodal neural synthesis</span>
-                    </div>
-                    <div class="trust-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-                        </svg>
-                        <span>Explicit citations & timestamps</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+          <p class="hero-subtitle">
+            Automate customer engagement, qualify high-intent inbound leads, and sync every interaction directly to Google Sheets in real-time. Built for high-velocity teams.
+          </p>
 
-        <!-- Features Section -->
-        <section class="section" style="background: var(--color-bg-surface); margin-bottom: 0;">
-            <div class="container">
-                <span class="section-title">Capabilities Grid</span>
-                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px;">More than an AI chatbot — Built for info that changes</h2>
-
-                <div class="grid grid-2">
-                    <div class="card-dark">
-                        <div class="badge">Sub-100ms Ingestion</div>
-                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Real-Time Search</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Instantaneous telemetry across global live sources without stale cache errors.</p>
-                    </div>
-
-                    <div class="card-dark">
-                        <div class="badge">Cryptographic</div>
-                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Source-Backed</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Every sentence maps directly to validated citation URLs.</p>
-                    </div>
-
-                    <div class="card-dark">
-                        <div class="badge">Delta Tracking</div>
-                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">What Changed?</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Inspect semantic diffs over 24-48 hours of developing news.</p>
-                    </div>
-
-                    <div class="card-dark">
-                        <div class="badge">Radar Active</div>
-                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Topic Monitoring</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Set automated radars on competitive accounts or market tickers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Metrics Section -->
-        <section class="section">
-            <div class="container">
-                <span class="section-title">Ultra Low Latency Pipeline</span>
-                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px;">Engineered for decisions that cannot wait</h2>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                    <div class="card-dark">
-                        <p style="font-size: 24px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">99.4%</p>
-                        <p style="font-size: 11px; color: var(--color-text-muted);">Source Accuracy</p>
-                    </div>
-                    <div class="card-dark">
-                        <p style="font-size: 24px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">50k+</p>
-                        <p style="font-size: 11px; color: var(--color-text-muted);">Live Sources</p>
-                    </div>
-                    <div class="card-dark">
-                        <p style="font-size: 36px; font-weight: 700; color: var(--color-accent-cyan); margin-bottom: 4px;">< 5 sec</p>
-                        <p style="font-size: 11px; color: var(--color-accent-green);">Average Latency</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Audience Section -->
-        <section class="section">
-            <div class="container">
-                <span class="section-title">Applied Intelligence</span>
-                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px; text-align: center;">Built for minds that demand fresh facts</h2>
-
-                <div class="grid grid-2" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                    <div class="card-dark" style="background: var(--color-bg-surface);">
-                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Professionals</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Prepare for meetings with morning memos synthesizing industry changes.</p>
-                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Instant briefing notes →</p>
-                    </div>
-
-                    <div class="card-dark" style="background: var(--color-bg-surface);">
-                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Researchers</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Track daily patent filings and preprints without manual tracking fatigue.</p>
-                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Real-time literature scan →</p>
-                    </div>
-
-                    <div class="card-dark" style="background: var(--color-bg-surface);">
-                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Developers</h3>
-                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Debug against library updates merged minutes ago.</p>
-                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Live framework telemetry →</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="section" style="text-align: center; padding: 64px 20px;">
-            <div class="container">
-                <h2 class="section-heading" style="font-size: 32px; margin-bottom: 16px;">Stop searching through noise.<br>Start understanding what matters.</h2>
-                <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Join thousands of analysts and builders who trust Levi.ai for real-time intelligence.
-                </p>
-                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn btn-primary" onclick="document.getElementById('name').focus()">Start Exploring Free</button>
-                    <button class="btn btn-secondary">See How It Works</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-top">
-                <div>
-                    <div class="footer-brand">
-                        <span class="footer-brand-text">Levi<span class="accent">.ai</span></span>
-                    </div>
-                    <p class="footer-desc">Live intelligence for a changing world. Synthetic reasoning and sub-millisecond telemetry.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <p class="footer-col-title">Product</p>
-                        <p>AI Search</p>
-                        <p>Live Answers</p>
-                        <p>Sources</p>
-                    </div>
-                    <div class="footer-col">
-                        <p class="footer-col-title">Company</p>
-                        <p>About</p>
-                        <p>Contact</p>
-                        <p>Privacy</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>© 2026 Levi.ai. All rights reserved.</p>
-                <div class="social-icons">
-                    <div class="social-icon">🌐</div>
-                    <div class="social-icon">💻</div>
-                    <div class="social-icon">🔔</div>
-                </div>
-            </div>
+          <ul class="hero-features-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Sub-120ms Gemini Flash AI</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Instant Google Sheets Sync</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>SOC2-Compliant Security</span>
+            </li>
+          </ul>
         </div>
-    </footer>
 
-    <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4P6GRpl4qPdFEF0Xf441H3jpsp9vbSTua_OUedDwntoZkdhGTV9iCfFr_H4VL1RtOtw/exec';
+        <!-- Right: Hero Form (Strictly: Name, Email, Phone ONLY) -->
+        <div class="form-wrapper">
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2 class="form-card-title">Join Levi.ai Priority Access</h2>
+              <p class="form-card-desc">Get instant sandboxed API credentials and early adopter onboarding.</p>
+            </div>
 
-        const form = document.getElementById('contactForm');
-        const statusDiv = document.getElementById('formStatus');
-        const submitBtn = form.querySelector('button[type="submit"]');
+            <form id="hero-lead-form" novalidate>
+              <!-- 1. Full Name -->
+              <div class="form-group">
+                <label for="lead-name" class="form-label">Full Name</label>
+                <input 
+                  type="text" 
+                  id="lead-name" 
+                  name="name" 
+                  class="form-input" 
+                  placeholder="e.g. Alex Vance" 
+                  required 
+                  autocomplete="name"
+                >
+              </div>
 
-        form.addEventListener('submit', handleFormSubmit);
+              <!-- 2. Work Email -->
+              <div class="form-group">
+                <label for="lead-email" class="form-label">Work Email</label>
+                <input 
+                  type="email" 
+                  id="lead-email" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="alex@company.com" 
+                  required 
+                  autocomplete="email"
+                >
+              </div>
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
+              <!-- 3. Phone Number -->
+              <div class="form-group">
+                <label for="lead-phone" class="form-label">Phone Number</label>
+                <input 
+                  type="tel" 
+                  id="lead-phone" 
+                  name="phone" 
+                  class="form-input" 
+                  placeholder="+1 (555) 019-2834" 
+                  required 
+                  autocomplete="tel"
+                >
+              </div>
 
-            // Get form values
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
+              <!-- Submit Button -->
+              <button type="submit" id="hero-submit-btn" class="form-submit-btn">
+                <span class="btn-spinner" id="submit-spinner" aria-hidden="true"></span>
+                <span class="btn-text" id="submit-btn-text">Join Now</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
 
-            // Validate
-            if (!name || !email || !phone) {
-                showError('Please fill in all fields');
-                return;
-            }
+              <!-- Feedback message container (Success / Error) -->
+              <div id="form-message" class="form-message" role="alert" aria-live="polite"></div>
 
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = 'Submitting...';
+              <div class="form-trust-footer">
+                <span>🔒 256-bit SSL</span>
+                <span>•</span>
+                <span>No Credit Card</span>
+                <span>•</span>
+                <span>Instant Setup</span>
+              </div>
+            </form>
+          </div>
+        </div>
 
-            // Build URL with query parameters
-            const params = new URLSearchParams({ name, email, phone });
-            const url = SCRIPT_URL + '?' + params.toString();
+      </div>
+    </section>
 
-            // Fetch with no-cors and proper error handling
-            fetch(url, {
-                method: 'GET',
-                mode: 'no-cors'
+    <!-- ========================================================================
+         METRICS SECTION (3 STATS)
+         ======================================================================== -->
+    <section class="metrics-section" id="metrics" aria-label="Performance Metrics">
+      <div class="container">
+        <div class="metrics-grid">
+          
+          <div class="metric-card">
+            <div class="metric-value cyan-gradient-text">99.98%</div>
+            <div class="metric-label">Autonomous Accuracy</div>
+            <div class="metric-sub">Precision reasoning across enterprise pipelines</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value cyan-gradient-text">&lt; 120ms</div>
+            <div class="metric-label">Inference Latency</div>
+            <div class="metric-sub">Powered by Gemini 1.5 Flash edge runtime</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value cyan-gradient-text">10x</div>
+            <div class="metric-label">Operational Speedup</div>
+            <div class="metric-sub">From inbound inquiry to spreadsheet sync</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FEATURES SECTION (4 CARDS)
+         ======================================================================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-tag">Core Architecture</span>
+          <h2 class="section-title">Engineered for Autonomous Execution</h2>
+          <p>Levi.ai combines multi-turn language understanding with enterprise data automation to eliminate manual workflows.</p>
+        </div>
+
+        <div class="features-grid">
+          
+          <!-- Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <h3 class="feature-card-title">Autonomous Reasoning Engine</h3>
+            <p class="feature-card-desc">
+              Context-aware agents dynamically parse user queries, determine intent, and perform actions without predefined brittle decision trees.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3 class="feature-card-title">Real-Time Conversational AI</h3>
+            <p class="feature-card-desc">
+              Sub-second conversational chat powered by Google Gemini. Handles objections, answers product questions, and captures lead data seamlessly.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </div>
+            <h3 class="feature-card-title">Automated Google Sheets Pipeline</h3>
+            <p class="feature-card-desc">
+              Zero-maintenance Google Apps Script integration routes leads, timestamps records, and notifies team members without costly third-party connectors.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3 class="feature-card-title">Enterprise Guardrails & Privacy</h3>
+            <p class="feature-card-desc">
+              All credentials stay securely server-side. Zero sensitive client leakage, continuous input sanitization, and automated rate-limiting safeguards.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         AUDIENCE SECTION (3+ USE CASES)
+         ======================================================================== -->
+    <section class="audience-section" id="solutions">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-tag">Target Audiences</span>
+          <h2 class="section-title">Built for Modern Growth Operators</h2>
+          <p>From fast-growing SaaS startups to high-volume e-commerce brands, Levi.ai streamlines customer acquisition.</p>
+        </div>
+
+        <div class="audience-grid">
+          
+          <!-- Use Case 1 -->
+          <div class="audience-card">
+            <div>
+              <span class="audience-role-tag">Startups & SaaS</span>
+              <h3 class="audience-card-title">High-Velocity Lead Capture</h3>
+              <p class="audience-card-desc">
+                Never lose an inbound prospect to slow response times. Levi greets visitors 24/7, qualifies budget and role, and pushes hot leads straight to your CRM spreadsheet.
+              </p>
+            </div>
+            <a href="#join-section" class="audience-badge">
+              <span>Deploy In Minutes &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Use Case 2 -->
+          <div class="audience-card">
+            <div>
+              <span class="audience-role-tag">E-Commerce & D2C</span>
+              <h3 class="audience-card-title">Conversational Concierge</h3>
+              <p class="audience-card-desc">
+                Guide shoppers through complex product catalogs, resolve shipping questions, and collect email/phone numbers for abandoned cart re-engagement.
+              </p>
+            </div>
+            <a href="#join-section" class="audience-badge">
+              <span>View E-Comm Stack &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Use Case 3 -->
+          <div class="audience-card">
+            <div>
+              <span class="audience-role-tag">Enterprise RevOps</span>
+              <h3 class="audience-card-title">Automated Spreadsheets & Dispatch</h3>
+              <p class="audience-card-desc">
+                Eliminate manual copy-pasting across disparate dashboards. Levi orchestrates structured row-level updates, audit trails, and instant team alerts.
+              </p>
+            </div>
+            <a href="#join-section" class="audience-badge">
+              <span>Explore RevOps Flow &rarr;</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         INTEGRATION / ARCHITECTURE PREVIEW
+         ======================================================================== -->
+    <section class="preview-section" id="integration">
+      <div class="container">
+        <div class="preview-card">
+          <div class="preview-header">
+            <div class="preview-title-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <h3 style="font-size: 1.25rem; color: #fff;">Automated Lead-to-Sheet Pipeline</h3>
+            </div>
+            <span class="preview-status-pill">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #00e676;"></span>
+              Active Webhook Connected
+            </span>
+          </div>
+
+          <div class="flow-steps">
+            <div class="flow-step-item">
+              <div class="flow-step-number">1</div>
+              <h4 class="flow-step-title">Inbound Submission</h4>
+              <p class="flow-step-desc">Visitor submits Name, Email, and Phone via our zero-friction landing page form or chat widget.</p>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-step-number">2</div>
+              <h4 class="flow-step-title">Google Apps Script Webhook</h4>
+              <p class="flow-step-desc">Payload is securely routed via HTTP GET URLSearchParams without browser CORS interruptions.</p>
+            </div>
+
+            <div class="flow-step-item">
+              <div class="flow-step-number">3</div>
+              <h4 class="flow-step-title">Live Spreadsheet Record</h4>
+              <p class="flow-step-desc">Row is automatically appended to "Responses" sheet with timestamp and formatted cell headers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CTA CALL-TO-ACTION SECTION
+         ======================================================================== -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card">
+          <h2 class="cta-title">Ready to Experience <span class="cyan-gradient-text">Levi.ai</span>?</h2>
+          <p class="cta-desc">
+            Deploy intelligent agents, automate customer acquisition, and scale operations effortlessly.
+          </p>
+          <div class="cta-actions">
+            <a href="#join-section" class="btn-primary">Join the Waitlist</a>
+            <button type="button" class="btn-secondary" id="cta-open-chat-btn">Chat with Levi</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom: 12px; display: inline-flex;">
+            <div class="brand-logo-icon">L</div>
+            <span>Levi<span class="cyan-gradient-text">.ai</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            The next-generation autonomous AI platform with native Google Sheets integration and sub-second edge reasoning.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Platform</h4>
+          <ul class="footer-col-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#metrics">Latency Metrics</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#integration">Google Sheets Sync</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Resources</h4>
+          <ul class="footer-col-links">
+            <li><a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer">Google Gemini API</a></li>
+            <li><a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel Deployment</a></li>
+            <li><a href="https://developers.google.com/apps-script" target="_blank" rel="noopener noreferrer">Google Apps Script</a></li>
+            <li><a href="#">API Documentation</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Security & Legal</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">SOC2 Compliance</a></li>
+            <li><a href="#">Security Safeguards</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Levi.ai. All rights reserved. Deployed on Vercel.</div>
+        <div>Engineered with Google Gemini 1.5 Flash &amp; Google Apps Script.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       FLOATING CHAT WIDGET (BOTTOM-RIGHT)
+       - Toggle button (minimized): bottom-right corner, 60px circle
+       - Gradient background: #00e5ff to #a8ffd2
+       - Chat window: 380px width, 500px height
+       - User messages: cyan background, right-aligned
+       - AI messages: dark background with cyan left border, left-aligned
+       - Input field: transparent background, cyan border on focus
+       - Send button: primary button style
+       - Loading indicator: "⏳ Thinking..."
+       - Error messages: red text with error icon
+       ======================================================================== -->
+  <div class="chat-widget-root" id="chat-widget-root">
+    
+    <!-- Minimized 60px Circle Toggle Button -->
+    <button 
+      type="button" 
+      class="chat-toggle-btn" 
+      id="chat-toggle-btn" 
+      aria-label="Toggle Levi AI Chat Assistant"
+      aria-expanded="false"
+      aria-controls="chat-window"
+    >
+      <span class="chat-status-dot" title="Levi AI Online"></span>
+      <!-- Chat Icon SVG -->
+      <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+      <!-- Close Icon SVG -->
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Chat Window Container (380px width, 500px height) -->
+    <div class="chat-window" id="chat-window" role="dialog" aria-modal="false" aria-label="Levi AI Chat Assistant">
+      
+      <!-- Gradient Header -->
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">L</div>
+          <div>
+            <div class="chat-header-title">Levi AI Assistant</div>
+            <div class="chat-header-status">● Online • Gemini Flash</div>
+          </div>
+        </div>
+
+        <div class="chat-header-actions">
+          <!-- Reset Chat History Button -->
+          <button type="button" class="chat-header-btn" id="chat-clear-btn" title="Clear chat history" aria-label="Clear chat history">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+          <!-- Close Window Button -->
+          <button type="button" class="chat-header-btn" id="chat-close-btn" title="Close chat window" aria-label="Close chat window">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+        <!-- Default AI Greeting -->
+        <div class="chat-bubble ai-msg">
+          <span>👋 Hi! I'm Levi, your AI assistant for Levi.ai. How can I help you explore our features, latency metrics, or Google Sheets automation today?</span>
+          <span class="chat-msg-time" id="welcome-msg-time">Just now</span>
+        </div>
+      </div>
+
+      <!-- Loading State Indicator -->
+      <div class="chat-loading" id="chat-loading">
+        <span>⏳ Thinking...</span>
+      </div>
+
+      <!-- Input Form -->
+      <div class="chat-footer">
+        <form id="chat-input-form" class="chat-input-form">
+          <input 
+            type="text" 
+            id="chat-input" 
+            class="chat-input-field" 
+            placeholder="Ask Levi anything..." 
+            autocomplete="off" 
+            maxlength="2000"
+            required
+            aria-label="Your message to Levi"
+          >
+          <button type="submit" id="chat-send-btn" class="chat-send-btn" aria-label="Send message">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CORE CLIENT LOGIC & INTEGRATIONS
+       ======================================================================== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ======================================================================
+      // 1. CONFIGURATION & CONSTANTS
+      // ======================================================================
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4P6GRpl4qPdFEF0Xf441H3jpsp9vbSTua_OUedDwntoZkdhGTV9iCfFr_H4VL1RtOtw/exec';
+      // If hosted on GitHub Pages (static), fallback to live Vercel backend for Gemini chat
+      const CHAT_API_ENDPOINT = (window.location.hostname.includes('github.io') || window.location.protocol === 'file:')
+        ? 'https://personal-ai-ruby.vercel.app/api/chat'
+        : '/api/chat';
+      const ANALYTICS_ENDPOINT = (window.location.hostname.includes('github.io') || window.location.protocol === 'file:')
+        ? 'https://personal-ai-ruby.vercel.app/api/analytics'
+        : '/api/analytics';
+      const STORAGE_KEY_CHAT = 'levi_chat_messages_v1';
+
+      // ======================================================================
+      // 2. HERO FORM SUBMISSION LOGIC
+      // Requirements:
+      // - Name, Email, Phone ONLY
+      // - GET method with URLSearchParams
+      // - NO .then(res.json()) - must use .catch() only
+      // - NO response.ok checks
+      // - Green success message, clear form, hide after 5 seconds
+      // - Red error message, hide after 5 seconds
+      // - Debounced submission & loading spinner state
+      // ======================================================================
+      const form = document.getElementById('hero-lead-form');
+      const submitBtn = document.getElementById('hero-submit-btn');
+      const submitBtnText = document.getElementById('submit-btn-text');
+      const submitSpinner = document.getElementById('submit-spinner');
+      const formMessage = document.getElementById('form-message');
+      
+      const nameInput = document.getElementById('lead-name');
+      const emailInput = document.getElementById('lead-email');
+      const phoneInput = document.getElementById('lead-phone');
+
+      let isFormSubmitting = false;
+      let formMessageTimeout = null;
+
+      function displayFormFeedback(message, isSuccess) {
+        if (formMessageTimeout) {
+          clearTimeout(formMessageTimeout);
+        }
+
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${isSuccess ? 'success' : 'error'}`;
+        formMessage.style.display = 'block';
+
+        // Auto-hide message after 5 seconds
+        formMessageTimeout = setTimeout(function() {
+          formMessage.style.display = 'none';
+          formMessage.className = 'form-message';
+        }, 5000);
+      }
+
+      function setFormLoading(loading) {
+        isFormSubmitting = loading;
+        submitBtn.disabled = loading;
+        if (loading) {
+          submitBtnText.textContent = 'Submitting...';
+          submitSpinner.style.display = 'inline-block';
+        } else {
+          submitBtnText.textContent = 'Join Now';
+          submitSpinner.style.display = 'none';
+        }
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Prevent double submit
+        if (isFormSubmitting) return;
+
+        const nameVal = nameInput.value.trim();
+        const emailVal = emailInput.value.trim();
+        const phoneVal = phoneInput.value.trim();
+
+        // 1. Validation: check all fields filled
+        if (!nameVal || !emailVal || !phoneVal) {
+          displayFormFeedback('✗ Please fill in all 3 required fields (Name, Email, Phone).', false);
+          return;
+        }
+
+        // 2. Email validation: HTML5 native check
+        if (!emailInput.checkValidity()) {
+          displayFormFeedback('✗ Please enter a valid email address (e.g. name@company.com).', false);
+          emailInput.focus();
+          return;
+        }
+
+        // Set Loading state
+        setFormLoading(true);
+
+        // Build URLSearchParams
+        const queryParams = new URLSearchParams({
+          name: nameVal,
+          email: emailVal,
+          phone: phoneVal
+        });
+
+        // Fire background analytics event
+        try {
+          fetch(ANALYTICS_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event: 'form_submission_attempt',
+              data: { email: emailVal }
             })
-            .then(() => showSuccess())
-            .catch(() => showError('Network error. Please try again.'))
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Join Now';
+          }).catch(function() {});
+        } catch (_) {}
+
+        // Execute GET request with URLSearchParams
+        // CRITICAL REQUIREMENTS:
+        // - NO .then(res.json())
+        // - NO response.ok checks
+        // - must use .catch() only
+        fetch(`${APPS_SCRIPT_URL}?${queryParams.toString()}`, {
+          method: 'GET',
+          mode: 'no-cors'
+        })
+        .then(function() {
+          // Success State
+          displayFormFeedback("✓ Thank you! We've received your information. Our team will reach out shortly.", true);
+          form.reset();
+        })
+        .catch(function(err) {
+          console.error('Submission Network Error:', err);
+          displayFormFeedback('✗ Network error occurred. Please check your connection and try again.', false);
+        })
+        .finally(function() {
+          setFormLoading(false);
+        });
+      });
+
+      // ======================================================================
+      // 3. CHAT WIDGET CONTROLLER
+      // Features:
+      // - Toggle button (minimized 60px circle)
+      // - Chat window (380px x 500px)
+      // - Scrollable messages with auto-scroll
+      // - User message: cyan background, right-aligned
+      // - AI message: dark background with cyan left border, left-aligned
+      // - Transparent input with focus cyan border
+      // - Loading state: "⏳ Thinking..."
+      // - Red error message with error icon
+      // - Keyboard support: Enter to send
+      // - LocalStorage chat history persistence
+      // - Lazy initialization
+      // ======================================================================
+      const chatToggleBtn = document.getElementById('chat-toggle-btn');
+      const chatWindow = document.getElementById('chat-window');
+      const chatCloseBtn = document.getElementById('chat-close-btn');
+      const chatClearBtn = document.getElementById('chat-clear-btn');
+      const chatMessages = document.getElementById('chat-messages');
+      const chatInputForm = document.getElementById('chat-input-form');
+      const chatInput = document.getElementById('chat-input');
+      const chatSendBtn = document.getElementById('chat-send-btn');
+      const chatLoading = document.getElementById('chat-loading');
+      const ctaOpenChatBtn = document.getElementById('cta-open-chat-btn');
+
+      let isChatOpen = false;
+      let isAiThinking = false;
+      let isChatInitialized = false;
+
+      function formatCurrentTime() {
+        const d = new Date();
+        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      // Initialize welcome timestamp
+      const welcomeTimeEl = document.getElementById('welcome-msg-time');
+      if (welcomeTimeEl) {
+        welcomeTimeEl.textContent = formatCurrentTime();
+      }
+
+      function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function toggleChatWindow(forceState) {
+        isChatOpen = typeof forceState === 'boolean' ? forceState : !isChatOpen;
+        
+        if (isChatOpen) {
+          chatWindow.classList.add('is-open');
+          chatToggleBtn.classList.add('is-active');
+          chatToggleBtn.setAttribute('aria-expanded', 'true');
+          
+          if (!isChatInitialized) {
+            lazyInitChat();
+          }
+
+          setTimeout(function() {
+            chatInput.focus();
+            scrollToBottom();
+          }, 150);
+        } else {
+          chatWindow.classList.remove('is-open');
+          chatToggleBtn.classList.remove('is-active');
+          chatToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      function lazyInitChat() {
+        isChatInitialized = true;
+        loadChatHistory();
+        
+        // Track analytics event
+        try {
+          fetch(ANALYTICS_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event: 'chat_widget_opened' })
+          }).catch(function() {});
+        } catch (_) {}
+      }
+
+      function appendMessage(sender, text, timestamp) {
+        const timeStr = timestamp || formatCurrentTime();
+        const bubble = document.createElement('div');
+        
+        if (sender === 'user') {
+          bubble.className = 'chat-bubble user-msg';
+          bubble.innerHTML = `<span></span><span class="chat-msg-time">${timeStr}</span>`;
+          bubble.querySelector('span').textContent = text;
+        } else if (sender === 'ai') {
+          bubble.className = 'chat-bubble ai-msg';
+          bubble.innerHTML = `<span></span><span class="chat-msg-time">${timeStr}</span>`;
+          bubble.querySelector('span').textContent = text;
+        } else if (sender === 'error') {
+          bubble.className = 'chat-bubble error-msg';
+          bubble.innerHTML = `<span>⚠️ ${escapeHtml(text)}</span><span class="chat-msg-time">${timeStr}</span>`;
+        }
+
+        chatMessages.appendChild(bubble);
+        scrollToBottom();
+        saveChatHistory();
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function saveChatHistory() {
+        try {
+          const bubbles = chatMessages.querySelectorAll('.chat-bubble');
+          const history = [];
+          bubbles.forEach(function(b) {
+            const isUser = b.classList.contains('user-msg');
+            const isAi = b.classList.contains('ai-msg');
+            const isErr = b.classList.contains('error-msg');
+            
+            const text = b.querySelector('span:first-child')?.textContent || '';
+            const time = b.querySelector('.chat-msg-time')?.textContent || '';
+            
+            if (isUser) history.push({ sender: 'user', text: text, time: time });
+            else if (isAi) history.push({ sender: 'ai', text: text, time: time });
+            else if (isErr) history.push({ sender: 'error', text: text, time: time });
+          });
+
+          // Save max 30 items
+          const recentHistory = history.slice(-30);
+          localStorage.setItem(STORAGE_KEY_CHAT, JSON.stringify(recentHistory));
+        } catch (e) {
+          // LocalStorage might be restricted
+        }
+      }
+
+      function loadChatHistory() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY_CHAT);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            chatMessages.innerHTML = ''; // Clear default greeting to replace with restored history
+            parsed.forEach(function(item) {
+              appendMessage(item.sender, item.text, item.time);
             });
+          }
+        } catch (e) {
+          console.warn('Could not restore chat history:', e);
         }
+      }
 
-        function showSuccess() {
-            statusDiv.textContent = '✓ Thank you! We\'ve received your information. Check your email for next steps.';
-            statusDiv.className = 'form-status success';
-            form.reset();
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                statusDiv.className = 'form-status';
-            }, 5000);
+      function clearChatHistory() {
+        if (confirm('Clear Levi chat conversation history?')) {
+          localStorage.removeItem(STORAGE_KEY_CHAT);
+          chatMessages.innerHTML = `
+            <div class="chat-bubble ai-msg">
+              <span>👋 Chat history cleared. How can I help you today?</span>
+              <span class="chat-msg-time">${formatCurrentTime()}</span>
+            </div>
+          `;
+          chatInput.focus();
         }
+      }
 
-        function showError(message) {
-            statusDiv.textContent = '✗ ' + message;
-            statusDiv.className = 'form-status error';
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                statusDiv.className = 'form-status';
-            }, 5000);
+      async function sendUserMessage() {
+        const text = chatInput.value.trim();
+        if (!text || isAiThinking) return;
+
+        // Add user message to UI
+        appendMessage('user', text);
+        chatInput.value = '';
+        
+        // Show loading state: "⏳ Thinking..."
+        isAiThinking = true;
+        chatSendBtn.disabled = true;
+        chatLoading.classList.add('is-active');
+        scrollToBottom();
+
+        try {
+          const res = await fetch(CHAT_API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: text })
+          });
+
+          const data = await res.json().catch(function() { return {}; });
+
+          if (!res.ok) {
+            const errDescription = data.error || `Server responded with status ${res.status}`;
+            appendMessage('error', errDescription);
+          } else if (data.response) {
+            appendMessage('ai', data.response);
+          } else {
+            appendMessage('error', 'Received empty response from Levi AI service.');
+          }
+        } catch (networkErr) {
+          console.error('Chat API request failure:', networkErr);
+          appendMessage('error', 'Network error connecting to Levi AI. Please check your internet connection.');
+        } finally {
+          isAiThinking = false;
+          chatSendBtn.disabled = false;
+          chatLoading.classList.remove('is-active');
+          scrollToBottom();
+          chatInput.focus();
         }
-    </script>
+      }
+
+      // Event Listeners for Chat
+      chatToggleBtn.addEventListener('click', function() {
+        toggleChatWindow();
+      });
+
+      chatCloseBtn.addEventListener('click', function() {
+        toggleChatWindow(false);
+      });
+
+      chatClearBtn.addEventListener('click', clearChatHistory);
+
+      chatInputForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        sendUserMessage();
+      });
+
+      if (ctaOpenChatBtn) {
+        ctaOpenChatBtn.addEventListener('click', function() {
+          toggleChatWindow(true);
+        });
+      }
+
+      // Keyboard support: Enter sends message (already handled by form submit),
+      // and Escape key closes the open chat window
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isChatOpen) {
+          toggleChatWindow(false);
+        }
+      });
+
+    })();
+  </script>
 </body>
 </html>

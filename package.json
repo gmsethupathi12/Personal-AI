@@ -1,0 +1,23 @@
+{
+  "name": "personal-ai-landing-page",
+  "version": "1.0.0",
+  "description": "Production-ready AI Landing Page with Chat Widget & Google Sheets Integration for Levi.ai",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "ai",
+    "landing-page",
+    "google-sheets",
+    "gemini-api",
+    "chat-widget",
+    "vercel"
+  ],
+  "author": "Levi.ai",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
