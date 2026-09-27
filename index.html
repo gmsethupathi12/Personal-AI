@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi.ai - Live Intelligence for a Changing World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg-dark: #0c0e13;
+            --color-bg-surface: #191c21;
+            --color-bg-card: #1d2025;
+            --color-text-primary: #e2e2ea;
+            --color-text-secondary: #bac9cc;
+            --color-text-muted: #849396;
+            --color-accent-cyan: #00e5ff;
+            --color-accent-cyan-light: #c3f5ff;
+            --color-accent-green: #a8ffd2;
+            --color-border: rgba(59, 73, 76, 0.2);
+            --color-purple: #d0bcff;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-image: radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
+
+        .text-xs { font-size: 10px; }
+        .text-sm { font-size: 12px; }
+        .text-base { font-size: 14px; }
+        .text-lg { font-size: 16px; }
+        .text-xl { font-size: 18px; }
+        .text-2xl { font-size: 22px; }
+        .text-3xl { font-size: 28px; }
+        .text-4xl { font-size: 32px; }
+        .text-5xl { font-size: 44px; }
+        .text-6xl { font-size: 54px; }
+
+        /* Utilities */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .gap-8 { gap: 32px; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .w-full { width: 100%; }
+        .text-center { text-align: center; }
+
+        /* Main Layout */
+        main {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 48px 20px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(25, 28, 33, 0.9);
+            border: 1px solid var(--color-border);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            margin-bottom: 24px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--color-accent-cyan-light);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 4px var(--color-accent-cyan);
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: var(--color-text-primary);
+            letter-spacing: -1.2px;
+        }
+
+        .hero h1 .accent { color: var(--color-accent-cyan); }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search/Form Box */
+        .search-box {
+            background: rgba(12, 14, 19, 0.96);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box input,
+        .search-box textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--color-text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            margin-bottom: 12px;
+        }
+
+        .search-box input::placeholder,
+        .search-box textarea::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .search-box-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--color-accent-cyan);
+            color: #00363d;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-accent-cyan);
+            color: var(--color-accent-cyan);
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(12, 14, 19, 0.85);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+
+        .card-dark {
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(168, 255, 210, 0.1);
+            border: 1px solid rgba(168, 255, 210, 0.2);
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 9px;
+            color: var(--color-accent-green);
+            font-weight: 600;
+        }
+
+        .badge::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent-green);
+            border-radius: 50%;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Sections */
+        .section {
+            padding: 48px 20px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            display: inline-block;
+            color: var(--color-accent-green);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-heading {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-text-primary);
+        }
+
+        /* Trust Row */
+        .trust-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .trust-item {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            font-size: 11px;
+            color: var(--color-text-muted);
+        }
+
+        .trust-item svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(25, 28, 33, 0.5);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text-primary);
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .form-group input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-accent-cyan);
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        /* Status Messages */
+        .form-status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .form-status.success {
+            background: rgba(168, 255, 210, 0.1);
+            border: 1px solid rgba(168, 255, 210, 0.3);
+            color: var(--color-accent-green);
+            display: block;
+        }
+
+        .form-status.error {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            color: #ff6464;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 40px 20px 24px;
+            background: var(--color-bg-dark);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .footer-brand-text {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-brand-text .accent {
+            color: var(--color-accent-cyan);
+            text-shadow: 0 0 4px rgba(0, 229, 255, 0.7);
+        }
+
+        .footer-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 48px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-col-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(59, 73, 76, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(40, 42, 48, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: rgba(0, 229, 255, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 32px 20px; }
+            .hero h1 { font-size: 28px; }
+            .section { padding: 32px 20px; }
+            .section-heading { font-size: 20px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; gap: 24px; }
+            .footer-links { flex-direction: column; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 24px; }
+            .hero-subtitle { font-size: 13px; }
+            .section-heading { font-size: 18px; }
+            .btn { padding: 8px 12px; font-size: 11px; }
+        }
+
+        /* Loading State */
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn.loading::after {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 8px;
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            border-top-color: var(--color-accent-cyan);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <span class="hero-badge">Live Intelligence</span>
+                <h1>Ask anything.<br>Get the <span class="accent">latest answer</span>.</h1>
+                <p class="hero-subtitle">
+                    Levi searches live information, analyzes multiple verified sources, and delivers clear, source-backed answers in seconds.
+                </p>
+
+                <!-- Form Box -->
+                <div class="search-box">
+                    <form id="contactForm">
+                        <div class="form-status" id="formStatus"></div>
+
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                        </div>
+
+                        <div class="search-box-bottom">
+                            <span></span>
+                            <button type="submit" class="btn btn-primary">Join Now</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Trust Row -->
+                <div class="trust-row">
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+                        </svg>
+                        <span>Live streaming web sources</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+                        </svg>
+                        <span>Multimodal neural synthesis</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+                        </svg>
+                        <span>Explicit citations & timestamps</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" style="background: var(--color-bg-surface); margin-bottom: 0;">
+            <div class="container">
+                <span class="section-title">Capabilities Grid</span>
+                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px;">More than an AI chatbot — Built for info that changes</h2>
+
+                <div class="grid grid-2">
+                    <div class="card-dark">
+                        <div class="badge">Sub-100ms Ingestion</div>
+                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Real-Time Search</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Instantaneous telemetry across global live sources without stale cache errors.</p>
+                    </div>
+
+                    <div class="card-dark">
+                        <div class="badge">Cryptographic</div>
+                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Source-Backed</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Every sentence maps directly to validated citation URLs.</p>
+                    </div>
+
+                    <div class="card-dark">
+                        <div class="badge">Delta Tracking</div>
+                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">What Changed?</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Inspect semantic diffs over 24-48 hours of developing news.</p>
+                    </div>
+
+                    <div class="card-dark">
+                        <div class="badge">Radar Active</div>
+                        <h3 style="font-size: 18px; margin: 12px 0 8px; color: var(--color-text-primary);">Topic Monitoring</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Set automated radars on competitive accounts or market tickers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Section -->
+        <section class="section">
+            <div class="container">
+                <span class="section-title">Ultra Low Latency Pipeline</span>
+                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px;">Engineered for decisions that cannot wait</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="card-dark">
+                        <p style="font-size: 24px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">99.4%</p>
+                        <p style="font-size: 11px; color: var(--color-text-muted);">Source Accuracy</p>
+                    </div>
+                    <div class="card-dark">
+                        <p style="font-size: 24px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">50k+</p>
+                        <p style="font-size: 11px; color: var(--color-text-muted);">Live Sources</p>
+                    </div>
+                    <div class="card-dark">
+                        <p style="font-size: 36px; font-weight: 700; color: var(--color-accent-cyan); margin-bottom: 4px;">< 5 sec</p>
+                        <p style="font-size: 11px; color: var(--color-accent-green);">Average Latency</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audience Section -->
+        <section class="section">
+            <div class="container">
+                <span class="section-title">Applied Intelligence</span>
+                <h2 class="section-heading" style="font-size: 28px; margin-bottom: 32px; text-align: center;">Built for minds that demand fresh facts</h2>
+
+                <div class="grid grid-2" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <div class="card-dark" style="background: var(--color-bg-surface);">
+                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Professionals</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Prepare for meetings with morning memos synthesizing industry changes.</p>
+                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Instant briefing notes →</p>
+                    </div>
+
+                    <div class="card-dark" style="background: var(--color-bg-surface);">
+                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Researchers</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Track daily patent filings and preprints without manual tracking fatigue.</p>
+                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Real-time literature scan →</p>
+                    </div>
+
+                    <div class="card-dark" style="background: var(--color-bg-surface);">
+                        <h3 style="font-size: 16px; color: var(--color-text-primary); margin-bottom: 8px;">Developers</h3>
+                        <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 8px;">Debug against library updates merged minutes ago.</p>
+                        <p style="font-size: 11px; color: var(--color-accent-cyan); cursor: pointer;">Live framework telemetry →</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section" style="text-align: center; padding: 64px 20px;">
+            <div class="container">
+                <h2 class="section-heading" style="font-size: 32px; margin-bottom: 16px;">Stop searching through noise.<br>Start understanding what matters.</h2>
+                <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Join thousands of analysts and builders who trust Levi.ai for real-time intelligence.
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="document.getElementById('name').focus()">Start Exploring Free</button>
+                    <button class="btn btn-secondary">See How It Works</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand">
+                        <span class="footer-brand-text">Levi<span class="accent">.ai</span></span>
+                    </div>
+                    <p class="footer-desc">Live intelligence for a changing world. Synthetic reasoning and sub-millisecond telemetry.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <p class="footer-col-title">Product</p>
+                        <p>AI Search</p>
+                        <p>Live Answers</p>
+                        <p>Sources</p>
+                    </div>
+                    <div class="footer-col">
+                        <p class="footer-col-title">Company</p>
+                        <p>About</p>
+                        <p>Contact</p>
+                        <p>Privacy</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Levi.ai. All rights reserved.</p>
+                <div class="social-icons">
+                    <div class="social-icon">🌐</div>
+                    <div class="social-icon">💻</div>
+                    <div class="social-icon">🔔</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4P6GRpl4qPdFEF0Xf441H3jpsp9vbSTua_OUedDwntoZkdhGTV9iCfFr_H4VL1RtOtw/exec';
+
+        const form = document.getElementById('contactForm');
+        const statusDiv = document.getElementById('formStatus');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', handleFormSubmit);
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            // Validate
+            if (!name || !email || !phone) {
+                showError('Please fill in all fields');
+                return;
+            }
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Submitting...';
+
+            // Build URL with query parameters
+            const params = new URLSearchParams({ name, email, phone });
+            const url = SCRIPT_URL + '?' + params.toString();
+
+            // Fetch with no-cors and proper error handling
+            fetch(url, {
+                method: 'GET',
+                mode: 'no-cors'
+            })
+            .then(() => showSuccess())
+            .catch(() => showError('Network error. Please try again.'))
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Join Now';
+            });
+        }
+
+        function showSuccess() {
+            statusDiv.textContent = '✓ Thank you! We\'ve received your information. Check your email for next steps.';
+            statusDiv.className = 'form-status success';
+            form.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                statusDiv.className = 'form-status';
+            }, 5000);
+        }
+
+        function showError(message) {
+            statusDiv.textContent = '✗ ' + message;
+            statusDiv.className = 'form-status error';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                statusDiv.className = 'form-status';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
